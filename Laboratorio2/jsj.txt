@@ -1,0 +1,24 @@
+<script>
+    // Seleccionamos el formulario con ID 'formTabla' y le agregamos un event listener
+    document.getElementById("formTabla").addEventListener("submit", function(e) {
+        // ⛔ Previene que el formulario se envíe de la forma tradicional (recargando la página)
+        e.preventDefault();
+
+        // 📦 Crea un objeto FormData con todos los datos del formulario
+        // Esto permite enviar los datos como si se hubiera hecho un formulario "normal"
+        let formData = new FormData(this);
+
+        // 📡 Usamos la función fetch() para enviar los datos al servidor
+        // fetch() permite hacer solicitudes HTTP (como POST o GET) sin recargar la página
+        fetch("parte1.php", { // URL del archivo PHP que procesará los datos
+            method: "POST",     // Método de envío: POST (porque queremos enviar datos)
+            body: formData      // El contenido que estamos enviando al servidor (en este caso, el número de la tabla)
+        })
+        .then(res => res.text()) // 🔁 Cuando recibimos la respuesta del servidor, la convertimos a texto plano
+        .then(data => {
+            // 🧾 El contenido que devuelve el servidor (las tablas) se muestra dentro del div con ID 'resultado'
+            // Con innerHTML insertamos ese contenido directamente en el HTML
+            document.getElementById("resultado").innerHTML = data;
+        });
+    });
+</script>
