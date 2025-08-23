@@ -1,0 +1,95 @@
+
+  * const formData = new FormData(this);
+
+¿Qué es FormData?
+Es una clase nativa del navegador que crea un contenedor con pares clave–valor a partir de los campos de un formulario.
+
+Incluye todos los controles que tengan atributo name (inputs, selects, textareas, files…).
+
+No incluye controles deshabilitados (disabled), y en el caso de checkbox/radio solo incluye los chequeados.
+
+¿Qué significa new FormData(this)?
+En listener estás usando una función normal (no flecha):
+
+  * document.getElementById("formTabla").addEventListener("submit", function (e) { ... })
+
+En ese contexto, this apunta al formulario que disparó el submit.
+Por eso new FormData(this) es equivalente a new FormData(document.getElementById("formTabla")).
+
+Si usaras función flecha, this ya no sería el formulario. En ese caso, usá e.currentTarget:
+
+  * form.addEventListener("submit", (e) => {
+   e.preventDefault();
+   const formData = new FormData(e.currentTarget);
+});
+
+¿Puede cambiarse el nombre de la variable?
+Sí, totalmente. formData es solo un identificador. Podrías usar, por ejemplo:
+
+  * const datos = new FormData(this);
+  * const cuerpo = new FormData(this);
+  * const datosFormulario = new FormData(this);
+
+¿Qué mete dentro?
+Para tu formulario:
+
+  * <input type="text" name="tabla" id="tabla" required>
+
+FormData va a producir algo como:
+
+clave: "tabla"
+
+valor: lo que haya escrito la persona en el input.
+
+Podés inspeccionarlo así:
+
+  * for (const [clave, valor] of formData.entries()) {
+    console.log(clave, valor);
+}
+
+¿Cómo lo manda fetch?
+
+  * fetch("parte1.php", {
+     method: "POST",
+     body: formData
+  })
+
+Al pasar un FormData como body, fetch configura automáticamente el header Content-Type: multipart/form-data con su boundary.
+Por eso no debés setear manualmente Content-Type en el fetch.
+
+En PHP, ese body llega como $_POST (y $_FILES si hubiera archivos). En tu caso, $_POST['tabla'].
+
+¿Qué hace .then(res => res.json())?
+Le dice a JS: “parseá la respuesta como JSON”.
+
+Para que funcione sin dramas, en PHP es buena práctica enviar:
+
+  * header("Content-Type: application/json");
+  * echo json_encode($tabla);
+
+Métodos útiles de FormData (por si mañana suman más campos)
+  * formData.get('tabla') → obtiene un valor.
+
+  * formData.set('tabla', '9') → reemplaza/crea.
+
+  * formData.append('campo', 'valor') → agrega otro par (útil para multi-valores).
+
+  * formData.has('tabla') → verifica existencia.
+
+  * formData.delete('tabla') → elimina.
+
+Alternativas y comparaciones rápidas
+URLSearchParams(formData) convierte a querystring (tabla=5) si alguna vez quieren enviar por GET:
+
+  * const qs = new URLSearchParams(new FormData(this)).toString();
+    fetch("parte1.php?" + qs);
+
+Si quisieran enviar JSON (no es tu caso ahora), sería:
+
+  * fetch("parte1.php", {
+     method: "POST",
+     headers: { "Content-Type": "application/json" },
+     body: JSON.stringify({ tabla: numero })
+  });
+
+(y en PHP leerías php://input).

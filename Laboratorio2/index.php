@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tablas</title>
+    <title>Tablas de Multiplicar PHP</title>
     <style>
         body {
             display: flex;
@@ -43,7 +43,7 @@
     <h1>Tablas de Multiplicar</h1>
     <form id="formTabla">
         <label for="tabla"><strong>Ingrese el número de la tabla que quiere ver</strong></label>
-        <input type="text" name="tabla" id="tabla" required>
+        <input type="number" name="tabla" id="tabla" required>
         <input type="submit" value="Ver tabla" id="boton">
     </form>
 
@@ -53,14 +53,17 @@
         document.getElementById("formTabla").addEventListener("submit", function(e) {
             e.preventDefault(); // Previene el envío normal del formulario
 
-            let formData = new FormData(this);
+            // Creamos un objeto FormData con los datos del formulario
+            const formData = new FormData(this); //new FormData(document.getElementById("formTabla"))
 
+            // Enviamos los datos al servidor usando fetch con método POST
             fetch("parte1.php", {
                 method: "POST",
-                body: formData
+                body: formData  // Le pasamos los datos del formulario
             })
-            .then(res => res.text())
+            .then(res => res.json()) // Procesamos la respuesta como JSON
             .then(data => {
+                // Mostramos la tabla recibida en el div "resultado"
                 document.getElementById("resultado").innerHTML = data;
             });
         });
