@@ -23,16 +23,29 @@
         }
 
         .calculadoraInicial {
-            background-color: aqua;
+            background-color: #b2e2f2;
             padding: 30px;
             display: flex;
             justify-content: center;
         }
 
         .areas {
-            background-color: red;
+            background-color: #ffda9e;
             display: flex;
             justify-content: space-around;
+            padding-top: 30px;
+        }
+
+        input{
+            border-radius: 200px;
+            border: none;
+            padding: 10px;
+        }
+
+        select{
+            border-radius: 200px;
+            border: none;
+            padding: 10px;
         }
     </style>
 </head>
