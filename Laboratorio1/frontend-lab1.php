@@ -7,38 +7,6 @@
 </head>
 <body>
 
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Roboto:ital,wght@0,100..900;1,100..900&family=Special+Gothic+Expanded+One&display=swap');
-
-    * {
-        font-family: "Roboto", sans-serif;
-    }
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-body {
-    margin: 0rem;
-}
-
-.calculadoraInicial {
-    background-color: aqua;
-    padding: 30px;
-    display: flex;
-    justify-content: center;
-}
-
-.areas{
-    background-color: red;
-    display: flex;
-    justify-content:space-around;
-}
-
-
-</style>
 
 <section class="calculadoraInicial">
 <form action="backend-lab1.php" method="post" >
