@@ -1,43 +1,80 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Bhaskara</title>
-</head>
-<body>
-
-<style>
-form {
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    gap: 10px;
-}
-
-body {
-    margin: 2rem;
-}
-</style>
-
-<form action="" method="post">
-
-    <label for="a">Número 1:</label>
-    <input type="text" name="numero1" id="a" required>
-
-    <label for="b">Número 2:</label>
-    <input type="text" name="numero2" id="b" required>
-
-    <label for="c">Número 3:</label>
-    <input type="text" name="numero3" id="c" required>
-
-    <input type="submit" value="Calcular" name="envio">
-</form>
-
-</body>
-</html>
-
 <?php
+// Verificamos si se envió el formulario
+if (isset($_POST['calcular-calculadora'])) {
+
+    // Recogemos los datos y los validamos como números
+    $num1 = (float)$_POST['num1Calculadora'];
+    $num2 = (float)$_POST['num2Calculadora'];
+    $operadorCalculadora = $_POST['operadorCalculadora'];
+
+    switch ($operadorCalculadora) {
+        case '+':
+            $resultadoCalculadora = $num1 + $num2;
+            break;
+        case '-':
+            $resultadoCalculadora = $num1 - $num2;
+            break;
+        case '*':
+            $resultadoCalculadora = $num1 * $num2;
+            break;
+        case '/':
+            if ($num2 != 0) {
+                $resultadoCalculadora = $num1 / $num2;
+            } else {
+                $resultadoCalculadora = "Error: División por cero";
+            }
+            break;
+        default:
+            $resultadoCalculadora = "Operador no válido";
+            break;
+    }
+
+    //te manda a frontend-lab1.php y le agrega en la URL el resultado de la operación ($resultadoCalculadora)
+      header("Location: frontend-lab1.php?resultadoCalculadora=$resultadoCalculadora");
+}
+// Verificamos si se envió el formulario
+if (isset($_POST['areaCuadrado'])) {
+
+    // Recogemos los datos y los validamos como números
+    $ladoCuadrado = (float)$_POST['ladoCuadrado'];
+    
+    $areaCuadrado = $ladoCuadrado * $ladoCuadrado;
+
+    header("Location: frontend-lab1.php?resultadoCuadrado=$areaCuadrado");
+}
+
+if (isset($_POST['areaRectangulo'])) {
+
+    // Recogemos los datos y los validamos como números
+    $ladoRectangulo = (float)$_POST['ladoRectangulo'];
+    $anchoRectangulo = (float)$_POST['anchoRectangulo'];
+    
+    $areaRectangulo = $ladoRectangulo * $anchoRectangulo;
+
+    header("Location: frontend-lab1.php?resultadoRectangulo=$areaRectangulo");
+}
+
+if (isset($_POST['areaTriangulo'])) {
+
+    // Recogemos los datos y los validamos como números
+    $baseTriangulo = (float)$_POST['baseTriangulo'];
+    $alturaTriangulo = (float)$_POST['alturaTriangulo'];
+    
+    $areaTriangulo = ($baseTriangulo * $alturaTriangulo)/ 2;
+
+   header("Location: frontend-lab1.php?resultadoTriangulo=$areaTriangulo");
+}
+
+if (isset($_POST['areaCircunferencia'])) {
+
+    // Recogemos los datos y los validamos como números
+    $radioCircunferencia = (float)$_POST['radioCircunferencia'];
+    $pi_constant = M_PI;
+    $areaCircunferencia = ($pi_constant * ($radioCircunferencia * $radioCircunferencia));
+
+   header("Location: frontend-lab1.php?resultadoCircunferencia=$areaCircunferencia");
+} 
+
 function raizPositiva($discriminante): bool {
     return $discriminante >= 0;
 }
@@ -56,17 +93,21 @@ function baskara($a, $b, $c) {
     return [$x1, $x2];
 }
 
-if (isset($_POST['envio'])) {
-    $a = (float) $_POST['numero1'];
-    $b = (float) $_POST['numero2'];
-    $c = (float) $_POST['numero3'];
+if (isset($_POST['calcular-bhaskara'])) {
+    $a = (float) $_POST['a'];
+    $b = (float) $_POST['b'];
+    $c = (float) $_POST['c'];
 
-    $resultado = baskara($a, $b, $c);
+    $resultadoBhaskara = baskara($a, $b, $c);
 
-    if ($resultado === null) {
-        echo "<p>No existen soluciones reales.</p>";
+    if ($resultadoBhaskara === null) {
+        $msg = "No existen soluciones reales.";
     } else {
-        echo "<p>Las soluciones son: x1 = {$resultado[0]}, x2 = {$resultado[1]}</p>"; //como es un arry hay que imprimir en pantalla el resultado teniendo en duenta las posiciones
+        $msg = "x1 = {$res[0]}, x2 = {$res[1]}";
     }
 }
+
+    header("Location: frontend-lab1.php?resultadoBhaskara=" . urlencode($msg));
+
+require("frontend-lab1.php");
 ?>
