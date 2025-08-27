@@ -42,14 +42,25 @@
 
     <h1>Tablas de Multiplicar</h1>
     <form id="formTabla">
-        <label for="tabla"><strong>Ingrese el número de la tabla que quiere ver</strong></label>
-        <input type="number" name="tabla" id="tabla" required>
+        <label for="tablaFORM"><strong>Ingrese el número de la tabla que quiere ver</strong></label>
+        <input type="number" name="tablaNAME" id="tablaID" required>
         <input type="submit" value="Ver tabla" id="boton">
     </form>
 
     <div id="resultado"></div>
 
+    <h1>Posibilidades de ganar el CINCO de ORO</h1>
+    <form id="formCincoOro">
+        <label for="vecesApostadas">Ingrese cuántas veces ha apostado:</label>
+        <input type="number" name="vecesApostadasNAME" id="inputVecesApostadas" required>
+        <input type="submit" id="btn-vecesApostadas">
+    </form>
+
+    <div id="resultadoOro"></div>
+
+
     <script>
+        //TABLA MULTIPLICAR
         document.getElementById("formTabla").addEventListener("submit", function(e) {
             e.preventDefault(); // Previene el envío normal del formulario
 
@@ -57,7 +68,7 @@
             const formData = new FormData(this); //new FormData(document.getElementById("formTabla"))
 
             // Enviamos los datos al servidor usando fetch con método POST
-            fetch("parte1.php", {
+            fetch("backend-lab2.php", {
                 method: "POST",
                 body: formData  // Le pasamos los datos del formulario
             })
@@ -65,6 +76,25 @@
             .then(data => {
                 // Mostramos la tabla recibida en el div "resultado"
                 document.getElementById("resultado").innerHTML = data;
+            });
+        });
+
+        //CINCO DE ORO
+        document.getElementById("formCincoOro").addEventListener("submit", function(e) {
+            e.preventDefault(); // Previene el envío normal del formulario
+
+            // Creamos un objeto FormData con los datos del formulario
+            const formDataCincoOro = new FormData(this); //new FormData(document.getElementById("formTabla"))
+
+            // Enviamos los datos al servidor usando fetch con método POST
+            fetch("backend-lab2.php", {
+                method: "POST",
+                body: formDataCincoOro  // Le pasamos los datos del formulario
+            })
+            .then(respuestaOro => respuestaOro.json()) // Procesamos la respuesta como JSON
+            .then(dataOro => {
+                // Mostramos la tabla recibida en el div "resultado"
+                document.getElementById("resultadoOro").innerHTML = dataOro;
             });
         });
     </script>
