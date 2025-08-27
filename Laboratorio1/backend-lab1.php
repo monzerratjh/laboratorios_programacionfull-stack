@@ -31,6 +31,7 @@ if (isset($_POST['calcular-calculadora'])) {
 
     //te manda a frontend-lab1.php y le agrega en la URL el resultado de la operación ($resultadoCalculadora)
       header("Location: frontend-lab1.php?resultadoCalculadora=$resultadoCalculadora");
+      exit;
 }
 // Verificamos si se envió el formulario
 if (isset($_POST['areaCuadrado'])) {
@@ -41,6 +42,7 @@ if (isset($_POST['areaCuadrado'])) {
     $areaCuadrado = $ladoCuadrado * $ladoCuadrado;
 
     header("Location: frontend-lab1.php?resultadoCuadrado=$areaCuadrado");
+    exit;
 }
 
 if (isset($_POST['areaRectangulo'])) {
@@ -52,6 +54,7 @@ if (isset($_POST['areaRectangulo'])) {
     $areaRectangulo = $ladoRectangulo * $anchoRectangulo;
 
     header("Location: frontend-lab1.php?resultadoRectangulo=$areaRectangulo");
+    exit;
 }
 
 if (isset($_POST['areaTriangulo'])) {
@@ -63,6 +66,7 @@ if (isset($_POST['areaTriangulo'])) {
     $areaTriangulo = ($baseTriangulo * $alturaTriangulo)/ 2;
 
    header("Location: frontend-lab1.php?resultadoTriangulo=$areaTriangulo");
+   exit;
 }
 
 if (isset($_POST['areaCircunferencia'])) {
@@ -73,6 +77,7 @@ if (isset($_POST['areaCircunferencia'])) {
     $areaCircunferencia = ($pi_constant * ($radioCircunferencia * $radioCircunferencia));
 
    header("Location: frontend-lab1.php?resultadoCircunferencia=$areaCircunferencia");
+   exit;
 } 
 
 function raizPositiva($discriminante): bool {
@@ -108,6 +113,6 @@ if (isset($_POST['calcular-bhaskara'])) {
 }
 
     header("Location: frontend-lab1.php?resultadoBhaskara=" . urlencode($msg));
+    exit;
 
-require("frontend-lab1.php");
 ?>

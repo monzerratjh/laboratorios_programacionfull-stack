@@ -7,8 +7,6 @@
 </head>
 <body>
 
-
-<section class="calculadoraInicial">
 <form action="backend-lab1.php" method="post" >
 
     <h1>Calculadora</h1>
@@ -37,9 +35,7 @@
 
 </form>
 
-</section>
 
-<section class="areas">
 
 <form action="backend-lab1.php" method="post" >
     <h2>Área del cuadrado:</h2>
@@ -93,12 +89,10 @@
     
     <input type="submit" value="areaCircunferencia" name="areaCircunferencia">
 
-     <?php if (isset($_GET['resultadoCircunferencia'])): ?>
-        <p>Área: <?= $_GET['resultadoCircunferencia'] ?></p>
+      <?php if (isset($_GET['resultadoCircunferencia'])): ?>
+        <p><?= $_GET['resultadoCircunferencia'] ?></p>
     <?php endif; ?>
 </form>
-
-</section>
 
 <form action="backend-lab1.php" method="post">
 
