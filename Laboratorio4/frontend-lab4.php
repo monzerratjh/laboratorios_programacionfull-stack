@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            gap: 10px;
+            background-color: #D4D65C;
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+        #boton {
+            border-radius: 1rem;
+            background-color: #5ca3d6ff;
+            border: none;
+            padding: 0.5rem;
+            color: white;
+        }
+        #tabla {
+            padding: 0.5rem;
+            border-radius: 1rem;
+            border: none;
+        }
+        label {
+            text-align: center;
+            font-size: 1rem;
+            padding-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Comprobar cedulas uruguayas </h1>
+    <form id="formComprobarCedula">
+        <label for="comprobarFORM"><strong>Ingrese su cedula para saber si es válida</strong></label>
+        <input type="number" name="comprobarNAME" id="comprobarID" required>
+        <input type="submit" value="Comprobar cedula" id="boton">
+    </form>
+
+    <div id="resultadoComprobar"></div>
+
+    <h1>Sistema generado de digitos verificadores</h1>
+    <form id="formVerificador">
+        <label for="verificador">Ingrese los primeros 7 digitos de su C.I:</label>
+        <input type="number" name="verificadorNAME" id="inputVerificador" required>
+        <input type="submit" id="btn-verificador">
+    </form>
+
+    <div id="resultadoVerificador"></div>
+
+    <script>
+        
+
+        //COMPROBAR CEDULAS
+        document.getElementById("formComprobarCedula").addEventListener("submit", function(e) {
+            e.preventDefault(); // Previene el envío normal del formulario
+
+            // Creamos un objeto FormData con los datos del formulario
+            const formComprobar = new FormData(this); //new FormData(document.getElementById("formTabla"))
+
+            // Enviamos los datos al servidor usando fetch con método POST
+            fetch("backend-lab4.php", {
+                method: "POST",
+                body: formComprobar  // Le pasamos los datos del formulario
+            })
+            .then(res => res.json()) // Procesamos la respuesta como JSON
+            .then(dataComprobar => {
+                // Mostramos la tabla recibida en el div "resultado"
+                document.getElementById("resultadoComprobar").innerHTML = dataComprobar;
+            });
+        });
+
+        //VERIFICADOR
+        document.getElementById("formVerificador").addEventListener("submit", function(e) {
+            e.preventDefault(); // Previene el envío normal del formulario
+
+            // Creamos un objeto FormData con los datos del formulario
+            const formDataVerificador = new FormData(this); //new FormData(document.getElementById("formTabla"))
+
+            // Enviamos los datos al servidor usando fetch con método POST
+            fetch("backend-lab4.php", {
+                method: "POST",
+                body: formVerificador  // Le pasamos los datos del formulario
+            })
+            .then(res => res.json()) // Procesamos la respuesta como JSON
+            .then(dataVerificador => {
+                // Mostramos la tabla recibida en el div "resultado"
+                document.getElementById("resultadoVerificador").innerHTML = dataVerificador;
+            });
+        });
+
+    </script>
+
+</body>
+</html>
