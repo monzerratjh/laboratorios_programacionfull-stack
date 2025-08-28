@@ -47,6 +47,25 @@ if (isset($_POST['vecesApostadasNAME'])) {
     }
 }
 
+
+if (isset($_POST['numeroFactorizarNAME'])) {
+    
+    // Convertimos el valor recibido a número entero para evitar errores
+    $numeroFactorizar = (int)$_POST['numeroFactorizarNAME']; 
+
+   
+    // Avisamos al navegador que la respuesta será un JSON
+    header("Content-Type: application/json");
+
+    // Convertimos el string con la tabla en formato JSON y lo enviamos al cliente
+    echo json_encode("Numero factorizado: ". calcularFactorial($numeroFactorizar));
+
+    // Cortamos la ejecución del script para asegurarnos de que no se mande nada más
+    exit;
+}
+
+
+
 // Función para calcular el factorial de un número
 function calcularFactorial($numeroAFactorizar) {
     $respuestaFactorizada = 1;

@@ -58,6 +58,15 @@
 
     <div id="resultadoOro"></div>
 
+    <h1>Cálculo de factoriales</h1>
+    <form id="formFactorizar">
+        <label for="numeroAFactorizar">Ingrese el número que quiere factorizar:</label>
+        <input type="number" name="numeroFactorizarNAME" id="numeroAFactorizar" required>
+        <input type="submit" id="btn-factorizar">
+    </form>
+
+    <div id="resultadoFactorizar"></div>
+
 
     <script>
         //TABLA MULTIPLICAR
@@ -95,6 +104,25 @@
             .then(dataOro => {
                 // Mostramos la tabla recibida en el div "resultado"
                 document.getElementById("resultadoOro").innerHTML = dataOro;
+            });
+        });
+
+        // FACTORIZAR
+         document.getElementById("formFactorizar").addEventListener("submit", function(e) {
+            e.preventDefault(); // Previene el envío normal del formulario
+
+            // Creamos un objeto FormData con los datos del formulario
+            const formDataFactorizar = new FormData(this); //new FormData(document.getElementById("..."))
+
+            // Enviamos los datos al servidor usando fetch con método POST
+            fetch("backend-lab2.php", {
+                method: "POST",
+                body: formDataFactorizar  // Le pasamos los datos del formulario
+            })
+            .then(res => res.json()) // Procesamos la respuesta como JSON
+            .then(dataFactorizar => {
+                // Mostramos la tabla recibida en el div "resultado"
+                document.getElementById("resultadoFactorizar").innerHTML = dataFactorizar;
             });
         });
     </script>
