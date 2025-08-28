@@ -32,7 +32,7 @@ if (isset($_POST['numeroBase'])) {
     $digito = calcularDigitoVerificadorCedula($numeroBase);
 
     header("Content-Type: application/json");
-    echo json_encode($digito);
+    echo json_encode("El ultimo digito es: ".$digito);
     exit;
 }
 
