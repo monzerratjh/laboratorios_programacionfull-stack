@@ -93,3 +93,23 @@ Si quisieran enviar JSON (no es tu caso ahora), sería:
   });
 
 (y en PHP leerías php://input).
+
+
+
+
+El cálculo del dígito verificador de una cédula uruguaya sigue un procedimiento basado en el algoritmo conocido como Módulo 10. A continuación, te detallamos el paso a paso para calcularlo manualmente:
+
+Identifica los números de la cédula: Toma los primeros siete dígitos (sin incluir el dígito verificador).
+Asigna los factores de multiplicación: Multiplica cada número por una secuencia fija de factores: 2, 9, 8, 7, 6, 3, 4. Repite esta secuencia si es necesario.
+Realiza las multiplicaciones: Multiplica cada dígito de la cédula por su factor correspondiente.
+Suma los resultados: Suma todos los valores obtenidos en el paso anterior.
+Obtén el resto: Divide la suma total por 10 y conserva el resto.
+Calcula el dígito verificador: Si el resto es 0, el dígito verificador será 0. De lo contrario, réstale el resto a 10. El resultado será el dígito verificador.
+Por ejemplo, para la cédula 1.234.567:
+
+Factores: 2, 9, 8, 7, 6, 3, 4.
+Multiplicaciones: 1×2,2×9,3×8,4×7,5×6,6×3,7×41 \times 2, 2 \times 9, 3 \times 8, 4 \times 7, 5 \times 6, 6 \times 3, 7 \times 41×2,2×9,3×8,4×7,5×6,6×3,7×4.
+Suma: 2 + 18 + 24 + 28 + 30 + 18 + 28 = 148.
+Resto: 148 mod 10 = 8.
+Dígito verificador: 10−8=210 - 8 = 210−8=2.
+En este caso, el dígito verificador sería 2.
