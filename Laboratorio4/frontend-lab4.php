@@ -43,7 +43,7 @@
     <h1>Comprobar cedulas uruguayas </h1>
     <form id="formComprobarCedula">
         <label for="comprobarFORM"><strong>Ingrese su cedula para saber si es válida</strong></label>
-        <input type="number" name="comprobarNAME" id="comprobarID" required>
+        <input type="number" name="comprobarNAME" id="comprobarFORM" required>
         <input type="submit" value="Comprobar cedula" id="boton">
     </form>
 
@@ -52,52 +52,43 @@
     <h1>Sistema generado de digitos verificadores</h1>
     <form id="formVerificador">
         <label for="verificador">Ingrese los primeros 7 digitos de su C.I:</label>
-        <input type="number" name="numeroBase" id="inputVerificador" required>
-        <input type="submit" id="btn-verificador">
+        <input type="number" name="numeroBase" id="Verificador" required>
+        <input type="submit" id="btn-verificador" value="Calcular Dig.Verificador">
     </form>
 
     <div id="resultadoVerificador"></div>
 
     <script>
         
+//COMPROBAR CEDULAS
+document.getElementById("formComprobarCedula").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const formComprobar = new FormData(this);
 
-        //COMPROBAR CEDULAS
-        document.getElementById("formComprobarCedula").addEventListener("submit", function(e) {
-            e.preventDefault(); // Previene el envío normal del formulario
+    fetch("backend-lab4.php", {
+        method: "POST",
+        body: formComprobar
+    })
+    .then(res => res.json())
+    .then(dataComprobar => {
+        document.getElementById("resultadoComprobar").innerHTML = dataComprobar;
+    });
+});
 
-            // Creamos un objeto FormData con los datos del formulario
-            const formComprobar = new FormData(this); //new FormData(document.getElementById("formTabla"))
+//VERIFICADOR
+document.getElementById("formVerificador").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const formDataVerificador = new FormData(this);
 
-            // Enviamos los datos al servidor usando fetch con método POST
-            fetch("backend-lab4.php", {
-                method: "POST",
-                body: formComprobar  // Le pasamos los datos del formulario
-            })
-            .then(res => res.json()) // Procesamos la respuesta como JSON
-            .then(dataComprobar => {
-                // Mostramos la tabla recibida en el div "resultado"
-                document.getElementById("resultadoComprobar").innerHTML = dataComprobar;
-            });
-        });
-
-        //VERIFICADOR
-        document.getElementById("formVerificador").addEventListener("submit", function(e) {
-            e.preventDefault(); // Previene el envío normal del formulario
-
-            // Creamos un objeto FormData con los datos del formulario
-            const formDataVerificador = new FormData(this); //new FormData(document.getElementById("formTabla"))
-
-            // Enviamos los datos al servidor usando fetch con método POST
-            fetch("backend-lab4.php", {
-                method: "POST",
-                body: formVerificador  // Le pasamos los datos del formulario
-            })
-            .then(res => res.json()) // Procesamos la respuesta como JSON
-            .then(dataVerificador => {
-                // Mostramos la tabla recibida en el div "resultado"
-                document.getElementById("resultadoVerificador").innerHTML = dataVerificador;
-            });
-        });
+    fetch("backend-lab4.php", {
+        method: "POST",
+        body: formDataVerificador
+    })
+    .then(res => res.json())
+    .then(dataVerificador => {
+        document.getElementById("resultadoVerificador").innerHTML = dataVerificador;
+    });
+});
 
     </script>
 
