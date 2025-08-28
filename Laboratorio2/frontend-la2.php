@@ -61,7 +61,7 @@
     <h1>Cálculo de factoriales</h1>
     <form id="formFactorizar">
         <label for="numeroAFactorizar">Ingrese el número que quiere factorizar:</label>
-        <input type="number" name="numeroFactorizarNAME" id="numeroAFactorizar" required>
+        <input type="number" name="numeroFactorizarNAME" id="numeroAFactorizar" maxlength="2" required>
         <input type="submit" id="btn-factorizar">
     </form>
 
