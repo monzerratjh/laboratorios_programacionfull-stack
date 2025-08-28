@@ -52,7 +52,7 @@
     <h1>Sistema generado de digitos verificadores</h1>
     <form id="formVerificador">
         <label for="verificador">Ingrese los primeros 7 digitos de su C.I:</label>
-        <input type="number" name="verificadorNAME" id="inputVerificador" required>
+        <input type="number" name="numeroBase" id="inputVerificador" required>
         <input type="submit" id="btn-verificador">
     </form>
 
