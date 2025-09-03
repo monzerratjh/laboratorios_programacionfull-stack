@@ -19,7 +19,7 @@
             border-radius: 1rem;
             padding: 1.5rem;
         }
-        #boton {
+        .boton {
             border-radius: 1rem;
             background-color: #5ca3d6ff;
             border: none;
@@ -44,7 +44,7 @@
     <form id="formTabla">
         <label for="tablaFORM"><strong>Ingrese el número de la tabla que quiere ver</strong></label>
         <input type="number" name="tablaNAME" id="tablaID" required>
-        <input type="submit" value="Ver tabla" id="boton">
+        <input type="submit" value="Ver tabla" class="boton">
     </form>
 
     <div id="resultado"></div>
@@ -53,7 +53,7 @@
     <form id="formCincoOro">
         <label for="vecesApostadas">Ingrese cuántas veces ha apostado:</label>
         <input type="number" name="vecesApostadasNAME" id="inputVecesApostadas" required>
-        <input type="submit" id="btn-vecesApostadas">
+        <input type="submit" id="btn-vecesApostadas"  class="boton">
     </form>
 
     <div id="resultadoOro"></div>
@@ -62,7 +62,7 @@
     <form id="formFactorizar">
         <label for="numeroAFactorizar">Ingrese el número que quiere factorizar:</label>
         <input type="number" name="numeroFactorizarNAME" id="numeroAFactorizar" maxlength="2" required>
-        <input type="submit" id="btn-factorizar">
+        <input type="submit" id="btn-factorizar" class="boton">
     </form>
 
     <div id="resultadoFactorizar"></div>

@@ -19,7 +19,7 @@
             border-radius: 1rem;
             padding: 1.5rem;
         }
-        #boton {
+        .boton {
             border-radius: 1rem;
             background-color: #5ca3d6ff;
             border: none;
@@ -44,7 +44,7 @@
     <form id="formComprobarCedula">
         <label for="comprobarFORM"><strong>Ingrese su cedula para saber si es válida</strong></label>
         <input type="number" name="comprobarNAME" id="comprobarFORM" required>
-        <input type="submit" value="Comprobar cedula" id="boton">
+        <input type="submit" value="Comprobar cedula" class="boton">
     </form>
 
     <div id="resultadoComprobar"></div>
@@ -53,7 +53,7 @@
     <form id="formVerificador">
         <label for="verificador">Ingrese los primeros 7 digitos de su C.I:</label>
         <input type="number" name="numeroBase" id="Verificador" required>
-        <input type="submit" id="btn-verificador" value="Calcular Dig.Verificador">
+        <input type="submit" id="btn-verificador" value="Calcular Dig.Verificador" class="boton">
     </form>
 
     <div id="resultadoVerificador"></div>

@@ -4,9 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bases Númericas</title>
+    <style>
+        .contenedorGeneral {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            gap: 10px;
+            background-color: #D4D65C;
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+        .boton {
+            border-radius: 1rem;
+            background-color: #5ca3d6ff;
+            border: none;
+            padding: 0.5rem;
+            color: white;
+        }
+
+        label {
+            text-align: center;
+            font-size: 1rem;
+            padding-bottom: 0.5rem;
+        }
+
+        #resultadoConversionBase{
+            color: green;
+        }
+    </style>
 </head>
 <body>
+    
+
     <h1>Bases Númericas</h1>
+
+    <div class="contenedorGeneral">
 
     <form id="formBases">
         <label for="">Tipo de Base:</label>
@@ -27,17 +64,19 @@
             <option value="Binario">Binario</option>
             <option value="Hexadecimal">Hexadecimal</option>
         </select>
-        <input type="submit" id="btn-convertirBase">
+        <input type="submit" id="btn-convertirBase" class="boton">
+
+        <div id="resultadoConversionBase"></div>
     </form>
-    <div id="resultadoConversionBase"></div>
+    
 
     <form action="" method="post">
         <!--El NAME al final va para indicar que está en el campo de name-->
-        <label for="">Número</label>
+        <label for="">Número 1</label>
         <input type="number" name="numeroCalcularNAME" id="num1" required>
 
         <label for="">Número 2</label>
-        <input type="number" name="numero2CalcularNAME" id="num2">
+        <input type="number" name="numero2CalcularNAME" id="num2" required>
 
         <label for="operador">Operación:</label>
         <select name="operador" id="tipoOperador" required>
@@ -46,9 +85,11 @@
             <option value="*">Multiplicación (*)</option>
             <option value="/">División (/)</option>
         </select>
-        <input type="submit" id="formBases2">
+        <input type="submit" id="formBases2"class="boton">
+        <div id="resultadoSumaConversionBase"></div> 
     </form>
-    <div id="resultadoSumaConversionBase"></div>    
+       
+    </div>
     
     <script>
         //CONVERSION DE BASES
