@@ -1,0 +1,9 @@
+header(): This function in PHP is used to send a raw HTTP header.
+
+"Content-Type: application/json": This is the actual HTTP header being sent.
+
+Content-Type: This is the name of the HTTP header. It indicates the media type of the resource.
+
+application/json: This is the value of the Content-Type header. It specifies that the data being sent is in JSON (JavaScript Object Notation) format.
+
+El código PHP echo json_encode( Resultado de la Conversión de Bases: .$resultado); exit; intenta convertir un texto de cadena de texto a JSON, pero es sintácticamente incorrecto porque se está tratando de serializar un string simple como si fuera un objeto o un array. Para corregirlo, el texto `Resultado de la Conversión de Bases: ` debe ser parte de un array o un objeto asociativo que se pase a json_encode para que funcione como una estructura de datos válida. 
