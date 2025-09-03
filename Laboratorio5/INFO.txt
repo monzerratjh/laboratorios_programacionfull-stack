@@ -1,0 +1,72 @@
+1) ¿Por qué el echo json_encode(...) “tiene que ser un arreglo”?
+
+En realidad no “tiene” que ser un arreglo. Lo que sí tiene que ser es un único JSON válido (un solo valor de nivel superior). Ese valor puede ser:
+
+Un objeto (lo más común para respuestas con campos nombrados):
+En PHP se logra con un array asociativo.
+
+echo json_encode([
+  "promedio" => $resultadoPromedio,
+  "leyenda"  => $mostrarLeyenda
+]);
+
+
+Ventaja: en el front-end accedés por nombre (data.promedio, data.leyenda), es claro y mantenible.
+
+Un array indexado (lista):
+
+echo json_encode([$resultadoPromedio, $mostrarLeyenda]);
+
+
+Desventaja: en el front-end usás índices (data[0], data[1]), menos legible.
+
+Un string simple:
+
+echo json_encode("Promedio: $resultadoPromedio | $mostrarLeyenda");
+
+
+Desventaja: perdés estructura. El front solo recibe texto, no campos.
+
+Lo que no podés hacer es imprimir dos JSON separados uno tras otro:
+
+echo json_encode("..."); 
+echo json_encode("...");  // ❌ JSON inválido (dos valores top-level)
+
+
+El parser del fetch(...).then(res => res.json()) espera un único JSON.
+
+Resumen: usamos “arreglo” (array asociativo → objeto JSON) porque querés enviar varias cosas juntas y accederlas por nombre en el front. No es obligatorio, solo es lo correcto y práctico para tu caso.
+
+2) ¿Por qué el return del promedio “no puede” ser en variable?
+
+Sí puede. Ambas formas son equivalentes:
+
+a) Guardar en variable y retornar la variable
+
+function calcularPromedio(...) {
+  $promedio = ($nota1 + ... + $nota10) / 10;
+  return $promedio; // ✅
+}
+
+
+b) Retornar la expresión directamente
+
+function calcularPromedio(...) {
+  return ($nota1 + ... + $nota10) / 10; // ✅
+}
+
+
+Si “no te funcionaba” cuando usabas una variable, suele ser por alguno de estos motivos (no por el uso de variable en sí):
+
+Olvidaste el return $promedio; (quedó comentado o lo cambiaste por un echo).
+
+Usaste $promedio fuera de la función sin asignar el retorno:
+
+$resultadoPromedio = calcularPromedio(...); // hay que capturar el return
+
+
+Sombras de variables / alcance: $promedio dentro de la función no existe fuera; sólo el valor retornado sale de la función.
+
+Orden de ejecución: imprimiste el JSON antes de calcular la leyenda, o hiciste exit; antes de tiempo.
+
+Resumen: retornar una variable o retornar la expresión es lo mismo; lo importante es hacer return (no echo) y capturar ese valor donde lo necesitás.

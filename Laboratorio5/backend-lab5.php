@@ -5,7 +5,7 @@ if (isset($_POST['comprobarNombreNAME'])) {
     $cedula = $_POST['comprobarCedulaNAME'];
     $localidad = $_POST['comprobarLocalidadNAME'];
     $telefono = $_POST['comprobarTelefonoNAME'];
-    $direccion = $_POST['comprobarTelefonoNAME'];
+    $direccion = $_POST['comprobarDireccionNAME'];
     $email = $_POST['comprobarEmailNAME'];
     $nota1 = $_POST['nota1NAME'];
     $nota2 = $_POST['nota2NAME'];
@@ -19,37 +19,36 @@ if (isset($_POST['comprobarNombreNAME'])) {
     $nota10 = $_POST['nota10NAME'];
 
     $resultadoPromedio = calcularPromedio($nota1, $nota2, $nota3, $nota4, $nota5, $nota6, $nota7, $nota8, $nota9, $nota10);
-
+     $mostrarLeyenda = leyenda($resultadoPromedio);
     header("Content-Type: application/json");
-    echo json_encode("Promedio de sus notas: ".$resultadoPromedio);
-
     
-    $mostrarLeyenda = leyenda($resultadoPromedio);
+echo json_encode([
+    "promedio" => $resultadoPromedio,
+    "leyenda"  => $mostrarLeyenda
+]);
+exit;
+
         
-    
-
-    echo json_encode("Leyenda: ".$mostrarLeyenda);
-    exit;
 }
 
 function calcularPromedio ($nota1, $nota2, $nota3, $nota4, $nota5, $nota6, $nota7, $nota8, $nota9, $nota10) {
-    $promedio = ($nota1+$nota2+$nota3+$nota4+$nota5+$nota6+$nota7+$nota8+$nota9+$nota10)/10;
-
-    return $promedio;
+    return ($nota1+$nota2+$nota3+$nota4+$nota5+$nota6+$nota7+$nota8+$nota9+$nota10)/10;
 }
 
 function leyenda($resultadoPromedio){
     if($resultadoPromedio>=1 && $resultadoPromedio <= 3) {
-        echo json_encode("Situación Académica: Examen Febrero");
-        exit;
+        return "Situación Académica: Examen Febrero";
+        
     } else if ($resultadoPromedio>=4 && $resultadoPromedio <= 7) {
-        echo json_encode("Situación Académica: Examen reglamentado");
-        exit;
+        return "Situación Académica: Examen reglamentado";
+        
     } else if ($resultadoPromedio>=8 && $resultadoPromedio <= 12) {
-        echo json_encode("Situación Académica: Exonerado.");
-        exit;
+        return "Situación Académica: Exonerado.";
+        
+    } else {
+        return "Situación Académica: Sin datos";
     }
-    return $resultadoPromedio;
+
 }
     
     

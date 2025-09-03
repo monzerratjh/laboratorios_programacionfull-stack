@@ -111,7 +111,8 @@
     })
     .then(res => res.json())
     .then(dataFicha => {
-        document.getElementById("resultadoNotas").innerHTML = dataFicha;
+        document.getElementById("resultadoNotas").innerHTML = `<p><strong>Promedio de sus notas:</strong> ${dataFicha.promedio}</p>
+        <p><strong>${dataFicha.leyenda}</strong></p>`;
     });
 });
 
