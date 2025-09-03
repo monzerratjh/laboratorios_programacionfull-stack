@@ -22,13 +22,19 @@ if (isset($_POST['comprobarNombreNAME'])) {
      $mostrarLeyenda = leyenda($resultadoPromedio);
     header("Content-Type: application/json");
     
-echo json_encode([
-    "promedio" => $resultadoPromedio,
-    "leyenda"  => $mostrarLeyenda
-]);
-exit;
-
-        
+    echo json_encode([
+        "alumno" => [
+            "nombre"    => $nombre,
+            "cedula"    => $cedula,
+            "localidad" => $localidad,
+            "telefono"  => $telefono,
+            "direccion" => $direccion,
+            "email"     => $email
+        ],
+        "promedio" => $resultadoPromedio,
+        "leyenda"  => $mostrarLeyenda
+    ]);
+    exit;      
 }
 
 function calcularPromedio ($nota1, $nota2, $nota3, $nota4, $nota5, $nota6, $nota7, $nota8, $nota9, $nota10) {

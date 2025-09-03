@@ -7,17 +7,17 @@
 <style>
         body {
             display: flex;
-            align-items: center;
-            flex-direction: column;
+            justify-content: center;
         }
         form {
             display: flex;
             flex-direction: column;
-            width: 200px;
+            width: 350px;
             gap: 10px;
             background-color: #D4D65C;
             border-radius: 1rem;
             padding: 1.5rem;
+            
         }
         .boton {
             border-radius: 1rem;
@@ -36,13 +36,22 @@
             font-size: 1rem;
             padding-bottom: 0.5rem;
         }
+
+        .resultadoFichaEstudiante {
+            display: flex;
+            flex-direction: column;
+            background-color: #D4D65C;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 1rem;
+        }
     </style>
 
 </head>
 <body>
 
- <h1>Ficha de estudiante</h1>
     <form id="formFichaEstudiante">
+        <h1>Ficha de estudiante</h1>
         <label for=""><strong>Nombre completo:</strong></label>
         <input type="text" name="comprobarNombreNAME"  required>
 
@@ -62,7 +71,6 @@
         <input type="email" name="comprobarEmailNAME" required>
 
         <h2>Notas asignaturas:</h2>
-
         <label for=""><strong>Nota matemática:</strong></label>
         <input type="number" name="nota1NAME" required>
 
@@ -93,7 +101,6 @@
         <label for=""><strong>Nota ciberseguridad:</strong></label>
         <input type="number" name="nota10NAME" required>
 
-
         <input type="submit" value="Enviar datos" class="boton">
 
     </form>
@@ -111,8 +118,20 @@
     })
     .then(res => res.json())
     .then(dataFicha => {
-        document.getElementById("resultadoNotas").innerHTML = `<p><strong>Promedio de sus notas:</strong> ${dataFicha.promedio}</p>
-        <p><strong>${dataFicha.leyenda}</strong></p>`;
+        document.getElementById("resultadoNotas").innerHTML = `
+        <div class="resultadoFichaEstudiante">
+        <h2>Datos del Alumno</h2>
+        <p><strong>Nombre:</strong> ${dataFicha.alumno.nombre}</p>
+        <p><strong>Cédula:</strong> ${dataFicha.alumno.cedula}</p>
+        <p><strong>Localidad:</strong> ${dataFicha.alumno.localidad}</p>
+        <p><strong>Dirección:</strong> ${dataFicha.alumno.direccion}</p>
+        <p><strong>Teléfono:</strong> ${dataFicha.alumno.telefono}</p>
+        <p><strong>Email:</strong> ${dataFicha.alumno.email}</p>
+
+        <h2>Resultados</h2>
+        <p><strong>Promedio de sus notas:</strong> ${dataFicha.promedio}</p>
+        <p><strong>${dataFicha.leyenda}</strong></p>
+        </div>`;
     });
 });
 
