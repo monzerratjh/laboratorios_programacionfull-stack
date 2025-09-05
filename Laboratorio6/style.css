@@ -12,6 +12,10 @@ form {
     width: 200px;
 }
 
+#formFactorialLab2, #formCincoOroLab2 {
+    width: 300px;
+}
+
 body {
     margin: 0rem;
 }

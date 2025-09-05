@@ -1,5 +1,5 @@
 // ===== LAB 1 =====
-document.getElementById("formCalculadoraLab1").addEventListener("submit", e=>{
+document.getElementById("formCalculadoraLab1").addEventListener("submit", function(e) {
     e.preventDefault(); // Evita que el formulario se envíe de manera tradicional (recargando la página)
 
     // Creamos un objeto FormData con los datos del formulario que disparó el evento
@@ -21,7 +21,7 @@ document.getElementById("formCalculadoraLab1").addEventListener("submit", e=>{
         document.getElementById("resultadoCalculadoraLab1").innerHTML = data.resultado);
 });
 
-document.getElementById("formAreasLab1").addEventListener("submit", e=>{
+document.getElementById("formAreasLab1").addEventListener("submit", function(e) {
     e.preventDefault();
 
     // Creamos un objeto FormData con los datos del formulario que disparó el evento
@@ -37,7 +37,7 @@ document.getElementById("formAreasLab1").addEventListener("submit", e=>{
     .then(data=> document.getElementById("resultadoCuadradoLab1").innerHTML = data.resultado);
 });
 
-document.getElementById("formRectanguloLab1").addEventListener("submit", e=>{
+document.getElementById("formRectanguloLab1").addEventListener("submit", function(e) {
     e.preventDefault();
 
     // Creamos un objeto FormData con los datos del formulario que disparó el evento
@@ -53,7 +53,7 @@ document.getElementById("formRectanguloLab1").addEventListener("submit", e=>{
     .then(data=> document.getElementById("resultadoRectanguloLab1").innerHTML = data.resultado);
 });
 
-document.getElementById("formTrianguloLab1").addEventListener("submit", e=>{
+document.getElementById("formTrianguloLab1").addEventListener("submit", function(e) {
     e.preventDefault();
 
     // Creamos un objeto FormData con los datos del formulario que disparó el evento
@@ -69,7 +69,7 @@ document.getElementById("formTrianguloLab1").addEventListener("submit", e=>{
     .then(data=> document.getElementById("resultadoTrianguloLab1").innerHTML = data.resultado);
 });
 
-document.getElementById("formCircunferenciaLab1").addEventListener("submit", e=>{
+document.getElementById("formCircunferenciaLab1").addEventListener("submit", function(e) {
     e.preventDefault();
 
     // Creamos un objeto FormData con los datos del formulario que disparó el evento
@@ -85,7 +85,7 @@ document.getElementById("formCircunferenciaLab1").addEventListener("submit", e=>
     .then(data=> document.getElementById("resultadoCircunferenciaLab1").innerHTML = data.resultado);
 });
 
-document.getElementById("formBhaskaraLab1").addEventListener("submit", e=>{
+document.getElementById("formBhaskaraLab1").addEventListener("submit", function(e) {
     e.preventDefault();
 
     // Creamos un objeto FormData con los datos del formulario que disparó el evento

@@ -90,40 +90,78 @@ function baskara($a, $b, $c) {
     return [$x1, $x2];
 }
 
+
 // ===== LAB 2 =====
 if(isset($_POST['tablaNAME'])){
-    $num = (int)$_POST['tablaNAME'];
+    // Convertimos el valor recibido a número entero para evitar errores
+    $numeroTablaMultiplicar = (int)$_POST['tablaNAME']; 
+    
+    // Variable donde iremos guardando la tabla como texto
     $tabla = "";
-    for($i=0;$i<=10;$i++){
-        $tabla .= "$num x $i = ".($num*$i)."<br>";
+
+    // Bucle para generar la tabla de multiplicar del número recibido
+    // Recorremos desde 0 hasta 10 y vamos concatenando el resultado en la variable $tabla
+    for ($i = 0; $i <= 10; $i++) {
+        $tabla .= $numeroTablaMultiplicar . " x " . $i . " = " . ($numeroTablaMultiplicar * $i) . "<br>";
     }
+
     echo json_encode($tabla);
     exit;
 }
 
-if(isset($_POST['vecesApostadasNAME'])){
-    $veces = (int)$_POST['vecesApostadasNAME'];
-    $total = factorial(48)/(factorial(5)*factorial(48-5));
-    if($veces>0 && $veces<=$total){
-        $prob = $veces / $total;
-        echo json_encode("Probabilidad: $prob");
+if (isset($_POST['vecesApostadasNAME'])) {
+    $vecesApostadas = (int)$_POST['vecesApostadasNAME'];
+
+    if ($vecesApostadas < 0) {
+        echo json_encode("Error, el número de veces ingresado debe ser positivo.");
+
+    } elseif ($vecesApostadas >= 1712304) {
+        echo json_encode("Error, el número de veces ingresado debe ser menor a 1712304"); 
+
     } else {
-        echo json_encode("Error: número inválido");
+        // veces * formulacombinada / 1
+        $probabilidadesOro = $vecesApostadas / formulaCombinaciones();
+
+        echo json_encode("Probabilidad: ". number_format($probabilidadesOro, 10));
+        // number_format($probabilidadesOro, 10)  formatea el número $probabilidadesOro con 10 decimales. Esto evita que PHP lo muestre en notación científica (exponencial)
     }
     exit;
 }
 
 if(isset($_POST['numeroFactorizarNAME'])){
-    $num = (int)$_POST['numeroFactorizarNAME'];
-    echo json_encode("Factorial de $num: ".factorial($num));
+    $numeroFactorizar = (int)$_POST['numeroFactorizarNAME'];
+
+    echo json_encode(" ".calcularFactorial($numeroFactorizar));
+
     exit;
 }
 
-function factorial($n){
-    $res=1;
-    for($i=2;$i<=$n;$i++) $res*=$i;
-    return $res;
+// Función para calcular el factorial de un número
+function calcularFactorial($numeroAFactorizar) {
+    
+    // Verificamos si el número es negativo
+    if ($numeroAFactorizar < 0) {
+        return "Error: el factorial no está definido para números negativos";
+        
+    } else {
+
+        $respuestaFactorizada = 1;
+        for ($i = $numeroAFactorizar; $i > 1; $i--) {
+            $respuestaFactorizada *= $i;
+        }
+        return $respuestaFactorizada;
+    }
 }
+
+// Función para calcular las combinaciones posibles
+function formulaCombinaciones() {
+    $numeroBolas = 48;
+    $numerosElegidos = 5;
+    $numerador = calcularFactorial($numeroBolas);
+    $denominador = calcularFactorial($numerosElegidos) * calcularFactorial($numeroBolas - $numerosElegidos);
+    return $numerador / $denominador;
+}
+
 
 // ===== LAB 3 =====
 if(isset($_POST['numeroConvertirNAME'])){
