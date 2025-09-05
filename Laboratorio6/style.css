@@ -36,15 +36,8 @@ body {
     padding-top: 30px;
 }
 
-input{
+input, select{
     border-radius: 200px;
     border: none;
     padding: 10px;
 }
-
-select{
-    border-radius: 200px;
-    border: none;
-    padding: 10px;
-}
-

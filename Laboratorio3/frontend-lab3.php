@@ -112,7 +112,7 @@
         });
 
         // CALCULADORA ENTRE BASES
-        document.getElementById("formBases2").addEventListener("click", function(e) {
+        document.getElementById("formBases2").addEventListener("submit", function(e) {
             e.preventDefault();
 
             const formDataCalculo = new FormData();

@@ -8,39 +8,53 @@
 </head>
 <body>
 
-    <section>
+    <section class="contenedor-uno">
         <h1>Bases Numéricas y Calculadora</h1>
 
         <form id="formBasesLab3">
             <h2>Conversión de Bases</h2>
+
+            <label for="">Tipo de Base:</label> 
             <select name="tipoBaseNAME" required>
                 <option value="Decimal">Decimal</option>
                 <option value="Binario">Binario</option>
                 <option value="Octal">Octal</option>
                 <option value="Hexadecimal">Hexadecimal</option>
             </select>
-            <input type="number" name="numeroConvertirNAME" placeholder="Número" required>
+
+            <label for="">Número a convertir</label>
+            <input type="number" name="numeroConvertirNAME"  required>
+
+            <label for="">Tipo de Base a Convertir:</label>
             <select name="baseConvertirNAME" required>
                 <option value="Decimal">Decimal</option>
                 <option value="Binario">Binario</option>
                 <option value="Octal">Octal</option>
                 <option value="Hexadecimal">Hexadecimal</option>
             </select>
-            <button type="submit">Convertir</button>
+
+            <input type="submit" id="btn-convertirBase" class="boton">
         </form>
         <div id="resultadoConversionLab3"></div>
 
         <form id="formCalcBasesLab3">
             <h2>Calculadora entre Bases</h2>
-            <input type="number" name="num1" placeholder="Número 1" required>
-            <input type="number" name="num2" placeholder="Número 2" required>
-            <select name="operador" required>
-                <option value="+">+</option>
-                <option value="-">-</option>
-                <option value="*">*</option>
-                <option value="/">/</option>
+            
+            <label for="">Número 1</label>
+            <input type="number" name="num1" required>
+            
+            <label for="operador">Operación:</label>
+            <select name="operador" id="tipoOperador" required>
+                <option value="+">Suma (+)</option>
+                <option value="-">Resta (-)</option>
+                <option value="*">Multiplicación (*)</option>
+                <option value="/">División (/)</option>
             </select>
-            <button type="submit">Calcular</button>
+
+            <label for="">Número 2</label>
+            <input type="number" name="num2" required>
+            
+            <input type="submit" id="formBases2"class="boton">
         </form>
         <div id="resultadoCalcBasesLab3"></div>
     </section>
