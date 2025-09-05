@@ -1,0 +1,79 @@
+this
+
+this se refiere al contexto en el que se ejecuta la función.
+
+En el caso de un manejador de eventos agregado “inline” o con .addEventListener, this suele apuntar al elemento que disparó el evento.
+
+Ejemplo:
+
+    document.getElementById("formTabla").   addEventListener("submit", function(e) {
+        const formData = new FormData(this); // this es el formulario que dispara el submit
+        console.log(this); // <form id="formTabla">...</form>
+    });
+
+
+Aquí this funciona perfectamente porque dentro de esa función, el contexto es el formulario mismo.
+
+e.target
+
+e.target es la propiedad del evento que indica qué elemento disparó el evento.
+
+Siempre hace referencia al elemento exacto que inició el evento, aunque la función esté en otro contexto.
+
+Ejemplo:
+
+    document.getElementById("formTabla").addEventListener("submit", function(e) {
+        const formData = new FormData(e.target); // e.target también es el formulario
+        console.log(e.target); // <form id="formTabla">...</form>
+    });
+
+
+En un submit de formulario, e.target y this apuntan al mismo elemento.
+
+En otros eventos, como un click en un botón dentro de un formulario, e.target puede ser el botón, mientras que this podría ser el formulario o el elemento al que le pusiste el listener.
+
+ * Diferencias clave
+this
+
+Qué representa: Contexto de ejecución de la función
+
+Cambia con: Cómo llamas a la función
+
+Uso común: Formularios y listeners directos
+
+Ejemplo típico: new FormData(this) en submit
+
+e.target
+
+Qué representa: Elemento que disparó el evento
+
+Cambia con: Siempre el elemento inicial del evento
+
+Uso común: Eventos delegados o bubbling
+
+Ejemplo típico: new FormData(e.target) también funciona
+
+* Regla práctica:
+Si tu evento es submit de un formulario, this y e.target apuntan al mismo formulario, así que puedes usar cualquiera de los dos. Pero si tu evento es click en un botón dentro del formulario, e.target apuntará al botón, y ahí this puede ser distinto según cómo definiste el listener.
+
+------------------------------------------------------
+
+    Explicación general
+
+addEventListener("submit", …):
+Escucha cuando el usuario envía el formulario.
+
+e.preventDefault():
+Previene el comportamiento por defecto del formulario (recargar la página). Esto es esencial si quieres manejar los datos con JavaScript y fetch.
+
+new FormData(e.target):
+Crea un objeto que contiene todos los valores del formulario, listo para enviarse al servidor.
+
+fetch("backend-lab6.php", { method: "POST", body: formData }):
+Envía los datos al archivo PHP usando POST. El servidor recibe los datos y puede procesarlos.
+
+.then(res => res.json()):
+Espera la respuesta del servidor y la convierte a JSON para que JavaScript pueda usarla.
+
+.then(data => { … }):
+Usa los datos recibidos para actualizar la página sin recargarla. En este caso, se muestra data.resultado en un div específico.

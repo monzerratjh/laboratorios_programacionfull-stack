@@ -3,43 +3,55 @@ header("Content-Type: application/json");
 
 // ===== LAB 1 =====
 if(isset($_POST['num1Calculadora'])){
-    $n1 = (float)$_POST['num1Calculadora'];
-    $n2 = (float)$_POST['num2Calculadora'];
+    $num1 = (float)$_POST['num1Calculadora'];
+    $num2 = (float)$_POST['num2Calculadora'];
     $operadorLab1 = $_POST['operadorCalculadora'];
+
     switch($operadorLab1){
-        case "+": $res=$n1+$n2; break;
-        case "-": $res=$n1-$n2; break;
-        case "*": $res=$n1*$n2; break;
-        case "/": $res=$n2!=0?$n1/$n2:"Error: división por 0"; break;
-        default: $res="Operador inválido"; break;
+        case '+': $resultadoCalculadora = $num1 + $num2; break;
+        case '-': $resultadoCalculadora = $num1 - $num2; break;
+        case '*': $resultadoCalculadora = $num1 * $num2; break;
+        case '/': $resultadoCalculadora = $num2 != 0 ? $num1 / $num2 : "Error: División por cero"; break;
+        default:  $resultadoCalculadora = "Operador no válido"; break;
     }
-    echo json_encode(["resultado"=>$res]);
+    echo json_encode(["resultado"=>$resultadoCalculadora]);
     exit;
 }
 
 if(isset($_POST['ladoCuadrado'])){
     $lado = (float)$_POST['ladoCuadrado'];
-    echo json_encode(["resultado"=>"Área cuadrado: ".($lado*$lado)]);
+
+    $areaCuadrado = $lado * $lado;
+    echo json_encode(["resultado"=>"Área cuadrado: ".($areaCuadrado)]);
     exit;
 }
 
 if(isset($_POST['ladoRectangulo'])){
-    $l = (float)$_POST['ladoRectangulo'];
-    $a = (float)$_POST['anchoRectangulo'];
-    echo json_encode(["resultado"=>"Área rectángulo: ".($l*$a)]);
+    $lado = (float)$_POST['ladoRectangulo'];
+    $ancho = (float)$_POST['anchoRectangulo'];
+
+    $areaRectangulo = $lado * $ancho;
+
+    echo json_encode(["resultado"=>"Área rectángulo: ".($areaRectangulo)]);
     exit;
 }
 
 if(isset($_POST['baseTriangulo'])){
-    $b = (float)$_POST['baseTriangulo'];
-    $h = (float)$_POST['alturaTriangulo'];
-    echo json_encode(["resultado"=>"Área triángulo: ".($b*$h/2)]);
+    $base = (float)$_POST['baseTriangulo'];
+    $altura = (float)$_POST['alturaTriangulo'];
+
+    $areaTriangulo = ($base * $altura) / 2;
+
+    echo json_encode(["resultado"=>"Área triángulo: ".($areaTriangulo)]);
     exit;
 }
 
 if(isset($_POST['radioCircunferencia'])){
-    $r = (float)$_POST['radioCircunferencia'];
-    echo json_encode(["resultado"=>"Área circunferencia: ".(pi()*$r*$r)]);
+    $radio = (float)$_POST['radioCircunferencia'];
+
+    $areaCircunferencia = M_PI * pow($radio, 2);
+
+    echo json_encode(["resultado"=>"Área circunferencia: ".($areaCircunferencia)]);
     exit;
 }
 
@@ -47,16 +59,35 @@ if(isset($_POST['a'])){
     $a = (float)$_POST['a'];
     $b = (float)$_POST['b'];
     $c = (float)$_POST['c'];
-    $d = $b*$b - 4*$a*$c;
-    if($d<0){
-        $res = "No tiene soluciones reales";
+
+    $resultadoBhaskara = baskara($a, $b, $c);
+
+    if ($resultadoBhaskara === null) {
+        $msg = "No existen soluciones reales.";
     } else {
-        $x1 = (-$b + sqrt($d))/(2*$a);
-        $x2 = (-$b - sqrt($d))/(2*$a);
-        $res = "x1=$x1 , x2=$x2";
+        $msg = "x1 = {$resultadoBhaskara[0]}, x2 = {$resultadoBhaskara[1]}";
     }
-    echo json_encode(["resultado"=>$res]);
+    
+    echo json_encode(["resultado"=>$msg]);
     exit;
+}
+
+function raizPositiva($discriminante): bool {
+    return $discriminante >= 0;
+}
+
+function baskara($a, $b, $c) {
+    $discriminante = ($b * $b) - (4 * $a * $c);
+
+    if (!raizPositiva($discriminante)) {
+        return null;
+    }
+
+    $raiz = sqrt($discriminante);
+    $x1 = (-$b + $raiz) / (2 * $a);
+    $x2 = (-$b - $raiz) / (2 * $a);
+
+    return [$x1, $x2];
 }
 
 // ===== LAB 2 =====

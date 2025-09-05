@@ -40,8 +40,10 @@
             <input type="number" name="ladoCuadrado" id="ladoCuadrado" required>
 
             <input type="submit" value="Calcular área" name="areaCuadrado">
+
+            <div id="resultadoCuadradoLab1"></div>
         </form>
-        <div id="resultadoCuadradoLab1"></div>
+        
 
         <form id="formRectanguloLab1">
             <h2>Área del rectángulo:</h2>
@@ -53,8 +55,10 @@
             <input type="number" name="anchoRectangulo" id="anchoRectangulo" required>
             
             <input type="submit" value="Calcular área" name="areaRectangulo">
+
+            <div id="resultadoRectanguloLab1"></div>
         </form>
-        <div id="resultadoRectanguloLab1"></div>
+        
 
         <form id="formTrianguloLab1">
             <h2>Área del triángulo:</h2>
@@ -66,8 +70,10 @@
             <input type="number" name="alturaTriangulo" id="alturaTriangulo" required>
             
             <input type="submit" value="Calcular área" name="areaTriangulo">
+
+            <div id="resultadoTrianguloLab1"></div>
         </form>
-        <div id="resultadoTrianguloLab1"></div>
+    
 
         <form id="formCircunferenciaLab1">
             <h2>Área de la circunferencia:</h2>
@@ -76,8 +82,10 @@
             <input type="number" name="radioCircunferencia" id="radioCircunferencia" required>
             
             <input type="submit" value="Calcular área" name="areaCircunferencia">
+
+            <div id="resultadoCircunferenciaLab1"></div>
         </form>
-        <div id="resultadoCircunferenciaLab1"></div>
+        
     </section>
         
     <section class="contenedor-uno">

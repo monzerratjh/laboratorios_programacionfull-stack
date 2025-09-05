@@ -9,6 +9,7 @@ form {
     flex-direction: column;
     gap: 10px;
     margin-bottom: 20px;
+    width: 200px;
 }
 
 body {
@@ -20,6 +21,8 @@ body {
     padding: 30px;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .contenedor-dos {
