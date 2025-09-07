@@ -165,49 +165,98 @@ function formulaCombinaciones() {
 
 // ===== LAB 3 =====
 if(isset($_POST['numeroConvertirNAME'])){
-    $numero = $_POST['numeroConvertirNAME'];
-    $baseIni = $_POST['tipoBaseNAME'];
-    $baseFin = $_POST['baseConvertirNAME'];
+    $baseInicial= $_POST['tipoBaseNAME'];
+    $numeroConvertir = (int)$_POST['numeroConvertirNAME'];
+    $tipoBaseConvertir = $_POST['baseConvertirNAME'];
 
-    switch($baseIni){
-        case "Binario": $dec = bindec($numero); break;
-        case "Octal": $dec = octdec($numero); break;
-        case "Hexadecimal": $dec = hexdec($numero); break;
-        default: $dec = intval($numero); break;
+    // Determinar valor decimal según base de origen (elegido por el usuario mediante el *select*)
+    switch($baseInicial) {
+        case "Binario": 
+            $Decimal = bindec($numeroConvertir); // -> Convierte binario a decimal
+            break;
+
+        case "Octal": 
+            $Decimal = octdec($numeroConvertir); // -> Convierte octal a decimal
+            break;
+
+        case "Hexadecimal": 
+            $Decimal = hexdec($numeroConvertir); // -> Convierte hexadecimal a decimal
+            break;
+
+        default: 
+            $Decimal = intval($numeroConvertir); // -> Ya es decimal
+            break; 
     }
 
-    switch($baseFin){
-        case "Binario": $res=decbin($dec); break;
-        case "Octal": $res=decoct($dec); break;
-        case "Hexadecimal": $res=strtoupper(dechex($dec)); break;
-        default: $res=$dec; break;
+    // Convertir a la base destino
+    switch($tipoBaseConvertir) {
+        case "Binario": 
+            $resultado = decbin($Decimal); // -> Convierte decimal a binario
+            break;
+
+        case "Octal": 
+            $resultado = decoct($Decimal); // -> Convierte decimal a octal
+            break;
+
+        case "Hexadecimal": 
+            $resultado = dechex($Decimal); // -> Convierte decimal a hexadecimal
+            break;
+        default: 
+            $resultado = $Decimal; // -> Ya es decimal
+            break;
     }
-    echo json_encode("Resultado: $res");
+
+    /*
+        INFO
+           - $Decimal almacena el valor del número ingresado en base 10 (decimal).
+
+           - Se utiliza como base intermedia: primero se convierte cualquier número (binario, octal, hexadecimal o decimal) a decimal, y luego desde decimal se convierte a la base final seleccionada.
+
+           - $resultado almacena el valor final convertido a la base deseada.
+    */
+
+    echo json_encode("Resultado de la Conversión de Bases: ".$resultado);
     exit;
 }
 
-if(isset($_POST['num1']) && isset($_POST['num2']) && isset($_POST['operador'])){
-    $n1 = (int)$_POST['num1'];
-    $n2 = (int)$_POST['num2'];
-    $operadorLab1 = $_POST['operador'];
-    $error="";
-    switch($operadorLab1){
-        case "+": $res=$n1+$n2; break;
-        case "-": $res=$n1-$n2; break;
-        case "*": $res=$n1*$n2; break;
-        case "/": $res=$n2!=0?$n1/$n2:$error="Error: división por 0"; break;
-        default: $error="Operador inválido"; break;
-    }
-    if($error){
-        echo json_encode(["error"=>$error]);
-    } else {
-        echo json_encode([
-            "decimal"=>$res,
-            "binario"=>decbin($res),
-            "octal"=>decoct($res),
-            "hexadecimal"=>strtoupper(dechex($res))
-        ]);
-    }
+if (isset($_POST['num1']) && isset($_POST['num2']) && isset($_POST['operador'])) {
+    $num1 = intval($_POST['num1']);
+    $num2 = intval($_POST['num2']);
+    $operador = $_POST['operador'];
+
+    switch ($operador) {
+        case "+": 
+            $resultado = $num1 + $num2; 
+            break;
+
+        case "-": 
+            $resultado = $num1 - $num2; 
+            break;
+
+        case "*": 
+            $resultado = $num1 * $num2; 
+            break;
+
+        case "/": 
+            if ($num2 == 0) {
+                echo json_encode([
+                    "error" => "Error: División por cero"
+                ]);
+                exit;
+            } else {
+                $resultado = $num1 / $num2;
+            }
+            break;
+            
+        default: 
+            echo json_encode("Error: Operador no válido");}
+
+    echo json_encode([
+        "decimal" => $resultado,
+        "binario" => decbin($resultado),
+        "octal" => decoct($resultado),
+        "hexadecimal" => strtoupper(dechex($resultado))
+    ]);
     exit;
 }
 

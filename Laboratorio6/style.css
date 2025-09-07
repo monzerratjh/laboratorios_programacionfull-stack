@@ -8,7 +8,7 @@ form {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     width: 200px;
 }
 
@@ -40,4 +40,8 @@ input, select{
     border-radius: 200px;
     border: none;
     padding: 10px;
+}
+
+div {
+    margin-bottom: 40px;
 }
