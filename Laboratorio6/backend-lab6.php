@@ -283,7 +283,7 @@ if (isset($_POST['comprobarNAME'])) {
     if ($digitoIngresado === $digitoCorrecto) {
         echo json_encode("La cédula $cedulaComprobar es válida.");
     } else {
-        echo json_encode("La cédula $cedulaComprobar es inválida. El dígito correcto es $digitoCorrecto.");
+        echo json_encode("La cédula $cedulaComprobar es inválida."); // "El dígito correcto es $digitoCorrecto."
     }
     exit;
 }
