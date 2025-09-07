@@ -260,39 +260,72 @@ if (isset($_POST['num1']) && isset($_POST['num2']) && isset($_POST['operador']))
     exit;
 }
 
+
 // ===== LAB 4 =====
-if(isset($_POST['comprobarNAME'])){
-    $cedula = $_POST['comprobarNAME'];
-    if(!is_numeric($cedula) || strlen($cedula)!=8){
-        echo json_encode("Cédula inválida");
+if (isset($_POST['comprobarNAME'])) {
+    $cedulaComprobar = $_POST['comprobarNAME'];
+
+    if (!is_numeric($cedulaComprobar) || strlen($cedulaComprobar) !== 8) {
+        echo json_encode("La cédula debe tener 8 dígitos.");
         exit;
     }
-    $base = substr($cedula,0,7);
-    $digito = calcularDigitoVerificador($base);
-    if(intval(substr($cedula,-1))==$digito){
-        echo json_encode("Cédula válida");
+
+    //substr se usa para extraer una parte de una cadena de texto. 
+    //En este caso tomar los primeros 7 caracteres y los guarda en la variable 
+    $numeroBase = substr($cedulaComprobar, 0, 7);
+
+    //Toma el último dígito de la cédula (el dígito verificador ingresado por el usuario) y lo convierte a número
+    $digitoIngresado = intval(substr($cedulaComprobar, -1));
+
+    //llama la función
+    $digitoCorrecto = calcularDigitoVerificadorCedula($numeroBase);
+
+    if ($digitoIngresado === $digitoCorrecto) {
+        echo json_encode("La cédula $cedulaComprobar es válida.");
     } else {
-        echo json_encode("Cédula inválida, dígito correcto: $digito");
+        echo json_encode("La cédula $cedulaComprobar es inválida. El dígito correcto es $digitoCorrecto.");
     }
     exit;
 }
 
-if(isset($_POST['numeroBase'])){
-    $base = $_POST['numeroBase'];
-    $digito = calcularDigitoVerificador($base);
-    echo json_encode("Dígito verificador: $digito");
+if (isset($_POST['numeroBase'])) {
+    $numeroBase = $_POST['numeroBase'];
+    $digito = calcularDigitoVerificadorCedula($numeroBase);
+
+    if ($digito === null) {
+        // si la función devolvió null se muestra UNICAMNETE el error (sin "El último dígito es:")
+        echo json_encode("Por favor, introduce un número base válido de 7 dígitos.");
+    } else {
+        // mostrra resultado
+        echo json_encode("El último dígito es: ".$digito);
+    }
     exit;
 }
 
-function calcularDigitoVerificador($num){
-    $fact = [2,9,8,7,6,3,4];
-    $suma=0;
-    for($i=0;$i<7;$i++){
-        $suma += intval($num[$i])*$fact[$i];
+function calcularDigitoVerificadorCedula($numeroBase) {
+    $factores = [2, 9, 8, 7, 6, 3, 4];
+
+    // Validar que sea numérico y de 7 dígitos
+    if (!is_numeric($numeroBase) || strlen($numeroBase) !== 7) {
+        return null; // asi no se mostrara " El ultimo digito es: Por favor, introduce un número base válido de 7 dígitos." sino que UNICAMNETE el error (aclarado en el *IF* mas arriba)
     }
-    $mod = $suma%10;
-    return $mod===0?0:10-$mod;
+
+    $suma = 0;
+    for ($i = 0; $i < strlen($numeroBase); $i++) {
+        $suma += intval($numeroBase[$i]) * $factores[$i];
+    }
+
+    $modulo = $suma % 10;
+
+    if ($modulo === 0) {
+        $digitoVerificador = 0;
+    } else {
+        $digitoVerificador = 10 - $modulo;
+    }
+
+    return $digitoVerificador;
 }
+
 
 // ===== LAB 5 =====
 if(isset($_POST['comprobarNombreNAME'])){

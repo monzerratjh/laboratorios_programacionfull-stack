@@ -1,17 +1,33 @@
 
 // ===== LAB 4 =====
-document.getElementById("formComprobarCedulaLab4").addEventListener("submit", e=>{
+document.getElementById("formComprobarCedulaLab4").addEventListener("submit", function(e) {
     e.preventDefault();
-    fetch("backend-lab6.php",{method:"POST",body:new FormData(e.target)})
-    .then(res=>res.json())
-    .then(data=> document.getElementById("resultadoComprobarLab4").innerHTML = data);
+    
+    const formDataComprobarCedula = new FormData(e.target); // e.target hace referencia al formulario mismo
+
+    // Enviamos los datos al servidor usando fetch con método POST
+    fetch("backend-lab6.php", {
+        method: "POST",
+        body: formDataComprobarCedula
+    })
+
+    .then(resultadoComprobarCedula=>resultadoComprobarCedula.json())
+    .then(dataComprobarCedula=> document.getElementById("resultadoComprobarLab4").innerHTML = dataComprobarCedula);
 });
 
-document.getElementById("formVerificadorLab4").addEventListener("submit", e=>{
+document.getElementById("formVerificadorLab4").addEventListener("submit", function(e) {
     e.preventDefault();
-    fetch("backend-lab6.php",{method:"POST",body:new FormData(e.target)})
-    .then(res=>res.json())
-    .then(data=> document.getElementById("resultadoVerificadorLab4").innerHTML = data);
+    
+    const formDataVerificador = new FormData(e.target); // e.target hace referencia al formulario mismo
+
+    // Enviamos los datos al servidor usando fetch con método POST
+    fetch("backend-lab6.php", {
+        method: "POST",
+        body: formDataVerificador
+    })
+
+    .then(resultadoVerificador=>resultadoVerificador.json())
+    .then(dataVerificador=> document.getElementById("resultadoVerificadorLab4").innerHTML = dataVerificador);
 });
 
 

@@ -8,20 +8,27 @@
 </head>
 <body>
     
-    <section>
-        <h1>Lab 4 - Cédulas Uruguayas</h1>
-
+    <section class="contenedor-uno">
+        
         <form id="formComprobarCedulaLab4">
-            <label>Ingrese su cédula:</label>
-            <input type="number" name="comprobarNAME" placeholder="Ej: 12345678" required>
-            <button type="submit">Comprobar</button>
+
+            <h1>Comprobar cédulas uruguayas </h1>
+
+             <label for="comprobarFORM">Ingrese su cedula para saber si es válida: </label>
+            <input type="number" name="comprobarNAME" required>
+
+            <input type="submit" value="Comprobar" class="boton">
         </form>
         <div id="resultadoComprobarLab4"></div>
 
         <form id="formVerificadorLab4">
-            <label>Ingrese los primeros 7 dígitos de su C.I:</label>
-            <input type="number" name="numeroBase" placeholder="Ej: 1234567" required>
-            <button type="submit">Calcular dígito verificador</button>
+
+            <h1>Generar dígito verificador</h1>
+
+            <label for="verificador">Ingrese los primeros 7 digitos de su C.I:</label>
+            <input type="number" name="numeroBase" id="Verificador" required>
+
+            <input type="submit" id="btn-verificador" value="Calcular" class="boton">
         </form>
         <div id="resultadoVerificadorLab4"></div>
     </section>
