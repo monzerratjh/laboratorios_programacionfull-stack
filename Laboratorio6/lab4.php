@@ -11,8 +11,7 @@
     <section class="contenedor-uno">
         
         <form id="formComprobarCedulaLab4">
-
-            <h1>Comprobar cédulas uruguayas </h1>
+            <h2>Comprobar cédulas uruguayas </h1>
 
              <label for="comprobarFORM">Ingrese su cedula para saber si es válida: </label>
             <input type="number" name="comprobarNAME" required>
@@ -22,8 +21,7 @@
         <div id="resultadoComprobarLab4"></div>
 
         <form id="formVerificadorLab4">
-
-            <h1>Generar dígito verificador</h1>
+            <h2>Generar dígito verificador</h1>
 
             <label for="verificador">Ingrese los primeros 7 digitos de su C.I:</label>
             <input type="number" name="numeroBase" id="Verificador" required>

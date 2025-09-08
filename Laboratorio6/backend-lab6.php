@@ -328,16 +328,79 @@ function calcularDigitoVerificadorCedula($numeroBase) {
 
 
 // ===== LAB 5 =====
-if(isset($_POST['comprobarNombreNAME'])){
-    $notas=[];
-    for($i=1;$i<=10;$i++){
-        $notas[] = floatval($_POST["nota{$i}NAME"]);
+if (isset($_POST['comprobarNombreNAME'])) {
+    $nombre = $_POST['comprobarNombreNAME'];
+    $cedula = $_POST['comprobarCedulaNAME'];
+    $localidad = $_POST['comprobarLocalidadNAME'];
+    $telefono = $_POST['comprobarTelefonoNAME'];
+    $direccion = $_POST['comprobarDireccionNAME'];
+    $email = $_POST['comprobarEmailNAME'];
+
+    $nota1 = $_POST['nota1NAME'];
+    $nota2 = $_POST['nota2NAME'];
+    $nota3 = $_POST['nota3NAME'];
+    $nota4 = $_POST['nota4NAME'];
+    $nota5 = $_POST['nota5NAME'];
+    $nota6 = $_POST['nota6NAME'];
+    $nota7 = $_POST['nota7NAME'];
+    $nota8 = $_POST['nota8NAME'];
+    $nota9 = $_POST['nota9NAME'];
+    $nota10 = $_POST['nota10NAME'];
+
+    if (strlen($cedula) !== 8) {
+        echo json_encode(["error" => "La cédula debe tener exactamente 8 dígitos."]);
+        exit;
+    } 
+
+    if (strlen($telefono) !== 9) {
+        echo json_encode(["error" => "El teléfono debe tener 9 dígitos."]);
+        exit;
     }
-    $promedio = array_sum($notas)/count($notas);
-    if($promedio>=7) $leyenda="Aprobado";
-    elseif($promedio>=4) $leyenda="Regular";
-    else $leyenda="Reprobado";
-    echo json_encode(["promedio"=>$promedio,"leyenda"=>$leyenda]);
-    exit;
+
+    $notas = [ $nota1, $nota2, $nota3, $nota4, $nota5, $nota6, $nota7, $nota8, $nota9, $nota10 ];
+
+    foreach ($notas as $nota) {
+        if ($nota < 1 || $nota > 10) {
+            echo json_encode(["error" => "Todas las notas deben estar entre 1 y 10."]);
+            exit;
+        }
+    }
+
+    $resultadoPromedio = calcularPromedio($nota1, $nota2, $nota3, $nota4, $nota5, $nota6, $nota7, $nota8, $nota9, $nota10);
+    
+    $mostrarLeyenda = leyenda($resultadoPromedio);
+    
+    echo json_encode([
+        "alumno" => [
+            "nombre"    => $nombre,
+            "cedula"    => $cedula,
+            "localidad" => $localidad,
+            "telefono"  => $telefono,
+            "direccion" => $direccion,
+            "email"     => $email
+        ],
+        "promedio" => $resultadoPromedio,
+        "leyenda"  => $mostrarLeyenda
+    ]);
+    exit;      
+}
+
+function calcularPromedio ($nota1, $nota2, $nota3, $nota4, $nota5, $nota6, $nota7, $nota8, $nota9, $nota10) {
+    return ($nota1+$nota2+$nota3+$nota4+$nota5+$nota6+$nota7+$nota8+$nota9+$nota10) / 10;
+}
+
+function leyenda($resultadoPromedio){
+    if($resultadoPromedio >= 1 && $resultadoPromedio <= 3) {
+        return "Situación Académica: Examen Febrero";
+        
+    } else if ($resultadoPromedio > 3 && $resultadoPromedio <= 7) {
+        return "Situación Académica: Examen reglamentado";
+        
+    } else if ($resultadoPromedio > 7 && $resultadoPromedio <= 10) {
+        return "Situación Académica: Exonerado.";
+        
+    } else {
+        return "Situación Académica: Sin datos";
+    }
 }
 ?>

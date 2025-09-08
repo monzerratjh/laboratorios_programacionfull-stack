@@ -16,9 +16,6 @@
             <label for="num1Calculadora">Número 1:</label>
             <input type="number" name="num1Calculadora" id="num1Calculadora" required>
 
-            <label for="num2Calculadora">Número 2:</label>
-            <input type="number" name="num2Calculadora" id="num2Calculadora" required>
-
             <label for="operadorCalculadora">Operación:</label>
             <select name="operadorCalculadora" id="operadorCalculadora" required>
                 <option value="+">Suma (+)</option>
@@ -26,6 +23,9 @@
                 <option value="*">Multiplicación (*)</option>
                 <option value="/">División (/)</option>
             </select>
+
+            <label for="num2Calculadora">Número 2:</label>
+            <input type="number" name="num2Calculadora" id="num2Calculadora" required>
 
             <input type="submit" value="Calcular" name="calcular-calculadora">
         </form>

@@ -4,18 +4,6 @@
     font-family: "Roboto", sans-serif;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 10px;
-    width: 200px;
-}
-
-#formFactorialLab2, #formCincoOroLab2 {
-    width: 300px;
-}
-
 body {
     margin: 0rem;
 }
@@ -42,6 +30,32 @@ input, select{
     padding: 10px;
 }
 
+label, input, select {
+    margin-bottom: 10px;
+}
+
 div {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+#formFactorialLab2, #formCincoOroLab2, #resultadoNotasLab5 {
+    width: 300px;
+}
+
+#formFichaEstudianteLab5 {
+    width: 500px;
+}
+
+.estudiante_notas {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
