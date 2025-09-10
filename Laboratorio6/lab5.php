@@ -35,6 +35,15 @@
             
             <div class="estudiante_notas">
                 <h2>Notas asignaturas</h2>
+
+                <label for="">Ingrese la cantidad de notas a promediar:</label>
+
+                <select name="canNotasNAME" id="canNotas" required>
+                    <option value="5">5 Asignatutas</option>
+                    <option value="10">10 Asignatutas</option>
+                    <option value="15">15 Asignatutas</option>
+                </select>
+              <!--  
                 <label>Nota matemática:</label>
                 <input type="number" name="nota1NAME" max="10" required>
 
@@ -64,8 +73,8 @@
 
                 <label>Nota ciberseguridad:</label>
                 <input type="number" name="nota10NAME" max="10" required>
-
-            </div>
+-->
+            </div> 
             
             <input type="submit" value="Enviar datos" class="boton">
         </form>

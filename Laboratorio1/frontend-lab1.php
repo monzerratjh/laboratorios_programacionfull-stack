@@ -4,50 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora Simple</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Roboto:ital,wght@0,100..900;1,100..900&family=Special+Gothic+Expanded+One&display=swap');
-
-        * {
-            font-family: "Roboto", sans-serif;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        body {
-            margin: 0rem;
-        }
-
-        .calculadoraInicial {
-            background-color: #b2e2f2;
-            padding: 30px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .areas {
-            background-color: #ffda9e;
-            display: flex;
-            justify-content: space-around;
-            padding-top: 30px;
-        }
-
-        input{
-            border-radius: 200px;
-            border: none;
-            padding: 10px;
-        }
-
-        select{
-            border-radius: 200px;
-            border: none;
-            padding: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="/Laboratorio6/style.css">
 </head>
 <body>
 
