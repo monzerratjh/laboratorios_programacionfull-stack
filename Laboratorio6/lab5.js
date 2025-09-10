@@ -1,4 +1,33 @@
 // ===== LAB 5 =====
+
+// escuchamos el evento "change" en el <select> con id="canNotas"
+document.getElementById("canNotas").addEventListener("change", function(e) {
+    e.preventDefault();
+
+    // guardamos la cantidad seleccionada (5, 10 o 15)
+    const cantidad = parseInt(this.value); //el elemento de HTML con id *canNotas*
+
+    // obtenemos el contenedor donde van a ir los inputs dinámicos
+    const contenedor = document.getElementById("contenedorNotas");
+    contenedor.innerHTML = "";
+
+    // creamos un contador para usar en el while
+    let i = 1;
+
+    // mientras i sea menor o igual a la cantidad seleccionada
+    while (i <= cantidad) {
+        // va agregando al contenedor un label y un input numérico
+        // name="nota${i}NAME" -> recibe en PHP 
+        contenedor.innerHTML += `
+            <label>Nota ${i}:</label> 
+            <input type="number" name="nota${i}NAME" min="1" max="10" required>
+        `; //Nota ${i} => // i -> 1, 2, 3, 4, 5, 6, ...
+        // incremo de i para que el bucle avance
+        i++;
+    }
+});
+
+
 document.getElementById("formFichaEstudianteLab5").addEventListener("submit", function(evento) {
     evento.preventDefault();
 

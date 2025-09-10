@@ -353,23 +353,6 @@
         $email = $_POST['comprobarEmailNAME'];
         $canNotas = $_POST['canNotasNAME'];
 
-        switch($canNotas){
-            case '5': 
-                $i=5;
-                for ($i=0; $i < ; $i++) { 
-                    # code...
-                } 
-                break;
-            case '10': 
-                $resultadoCalculadora = $num1 - $num2; 
-                break;
-            case '15': 
-                $resultadoCalculadora = $num1 * $num2; 
-                break;
-            default:  
-            $resultadoCalculadora = "Operador no válido"; 
-            break;
-        }
 
         if (strlen($cedula) !== 8) {
             echo json_encode(["error" => "La cédula debe tener exactamente 8 dígitos."]);
@@ -381,7 +364,35 @@
             exit;
         }
 
-        $notas = [ $nota1, $nota2, $nota3, $nota4, $nota5, $nota6, $nota7, $nota8, $nota9, $nota10 ];
+        if ($canNotas === "-") {
+            echo json_encode(["error" => "Debe elegir una de las opciones para poder ingresar sus notas."]);
+            exit;
+        }
+
+        // Recibir y validar notas usando while
+        $suma = 0;
+        $i = 1;
+        while ($i <= $canNotas) {
+            $campo = "nota{$i}NAME";
+
+            if (!isset($_POST[$campo])) {
+                echo json_encode(["Falta la nota {$i}."]);
+                exit;
+            }
+
+            $nota = (int)$_POST[$campo];
+            if ($nota < 1 || $nota > 10) {
+                echo json_encode(["La nota {$i} debe estar entre 1 y 10."]);
+                exit;
+            }
+
+            $suma += $nota;
+            $i++;
+        }
+
+        $resultadoPromedio = $suma / $canNotas;
+
+        /* $notas = [ $nota1, $nota2, $nota3, $nota4, $nota5, $nota6, $nota7, $nota8, $nota9, $nota10 ];
 
         foreach ($notas as $nota) {
             if ($nota < 1 || $nota > 10) {
@@ -390,7 +401,7 @@
             }
         }
 
-        $resultadoPromedio = calcularPromedio($nota1, $nota2, $nota3, $nota4, $nota5, $nota6, $nota7, $nota8, $nota9, $nota10);
+        $resultadoPromedio = calcularPromedio($nota1, $nota2, $nota3, $nota4, $nota5, $nota6, $nota7, $nota8, $nota9, $nota10); */
         
         $mostrarLeyenda = leyenda($resultadoPromedio);
         

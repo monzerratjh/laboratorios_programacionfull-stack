@@ -39,10 +39,13 @@
                 <label for="">Ingrese la cantidad de notas a promediar:</label>
 
                 <select name="canNotasNAME" id="canNotas" required>
+                    <option value="-"></option>
                     <option value="5">5 Asignatutas</option>
                     <option value="10">10 Asignatutas</option>
                     <option value="15">15 Asignatutas</option>
                 </select>
+
+                <div id="contenedorNotas"></div>
               <!--  
                 <label>Nota matemática:</label>
                 <input type="number" name="nota1NAME" max="10" required>

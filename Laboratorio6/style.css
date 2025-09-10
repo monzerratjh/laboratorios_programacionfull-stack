@@ -60,4 +60,8 @@ form {
     align-items: stretch;
 }
 
+#contenedorNotas {
+    display: flex;
+    flex-direction: column;
+}
 
